@@ -1,0 +1,32 @@
+{
+  "name": "@react-libraries/next-apollo-server",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -b",
+    "lint:fix": "eslint --fix && prettier -w src"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@types/formidable": "^2.0.5",
+    "formidable": "^2.1.1"
+  },
+  "devDependencies": {
+    "@apollo/server": "^4.3.0",
+    "@types/node": "^18.11.18",
+    "@typescript-eslint/eslint-plugin": "^5.47.1",
+    "eslint": "^8.31.0",
+    "eslint-config-next": "^13.1.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "graphql": "^16.6.0",
+    "next": "^13.1.1",
+    "prettier": "^2.8.1",
+    "typescript": "^4.9.4"
+  },
+  "author": "SoraKumo <info@croud.jp>",
+  "repository": "https://github.com/ReactLibraries/next-apollo-server"
+}
