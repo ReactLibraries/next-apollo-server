@@ -1,7 +1,13 @@
 # @react-libraries/next-apollo-server
 
 Package for calling ApolloServer4 from Next.js.
+
 'scalar Upload' is available for multipart data.
+The following headers need to be added to the client-side request in order for the upload to take place.
+
+```ts
+{'apollo-require-preflight': 'true'}
+```
 
 ## Sample
 
@@ -16,11 +22,11 @@ Package for calling ApolloServer4 from Next.js.
 ```ts
 import { promises as fs } from "fs";
 import { ApolloServer } from "@apollo/server";
-import { IResolvers } from "@graphql-tools/utils";
 import {
   executeHTTPGraphQLRequest,
   FormidableFile,
 } from "@react-libraries/next-apollo-server";
+import type { IResolvers } from "@graphql-tools/utils";
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
 /**
@@ -74,7 +80,6 @@ const resolvers: IResolvers<Context> = {
 const apolloServer = new ApolloServer<Context>({
   typeDefs,
   resolvers,
-  plugins: [],
 });
 apolloServer.start();
 
@@ -82,14 +87,14 @@ apolloServer.start();
  * APIRoute handler for Next.js
  */
 const handler: NextApiHandler = async (req, res) => {
-  // Convert NextApiRequest to body format for GraphQL (multipart/form-data support).
+  //Convert NextApiRequest to body format for GraphQL (multipart/form-data support).
   return executeHTTPGraphQLRequest({
     req,
     res,
     apolloServer,
     context: async () => ({ req, res }),
     options: {
-      // Maximum upload file size set at 10 MB
+      //Maximum upload file size set at 10 MB
       maxFileSize: 10 * 1024 * 1024,
     },
   });
