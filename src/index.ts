@@ -1,12 +1,13 @@
 import { promises as fs } from "fs";
 import { parse } from "url";
 import formidable from "formidable";
-import type {
+import {
   ApolloServer,
   BaseContext,
   ContextThunk,
   GraphQLRequest,
   HTTPGraphQLRequest,
+  HeaderMap,
 } from "@apollo/server";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -26,7 +27,7 @@ export type FormidableFile = formidable.File;
  * @returns Header in Map format
  */
 export const createHeaders = (req: NextApiRequest) =>
-  new Map(
+  new HeaderMap(
     Object.entries(req.headers).flatMap<[string, string]>(([key, value]) =>
       Array.isArray(value)
         ? value.flatMap<[string, string]>((v) => (v ? [[key, v]] : []))
